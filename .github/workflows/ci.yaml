@@ -14,7 +14,7 @@ on:
 jobs:
   ci:
     name: iOS universal video-default
-    runs-on: macos-15
+    runs-on: macos-26
     permissions:
       contents: write
 
@@ -47,7 +47,7 @@ jobs:
       - name: Xcode path
         id: xcode_path
         run: |
-          XCODE_PATH=$(realpath /Applications/Xcode_16.1.0.app)
+          XCODE_PATH=$(realpath /Applications/Xcode_26.6.app)
           "${XCODE_PATH}/Contents/Developer/usr/bin/xcodebuild" -version
           echo "xcode_path=${XCODE_PATH}" >> "$GITHUB_OUTPUT"
 
