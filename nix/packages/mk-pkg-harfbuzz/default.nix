@@ -25,9 +25,15 @@ let
     name = "${pname}-source-${version}";
     inherit (packageLock) url sha256;
   };
-  patchedSource = callPackage ../../utils/patch-shebangs/default.nix {
-    name = "${pname}-patched-source-${version}";
-    inherit src;
+  patchedSource = pkgs.runCommand "${pname}-patched-source-${version}" { } ''
+    cp -r ${src} src
+    chmod -R 777 src
+    patch -d src -p1 <${../../../patches/harfbuzz-fix-apple-sincosf.patch}
+    cp -r src $out
+  '';
+  fixedSource = callPackage ../../utils/patch-shebangs/default.nix {
+    name = "${pname}-fixed-source-${version}";
+    src = patchedSource;
     inherit nativeBuildInputs;
   };
 in
@@ -36,7 +42,7 @@ pkgs.stdenvNoCC.mkDerivation {
   name = "${pname}-${os}-${arch}-${version}";
   pname = pname;
   inherit version;
-  src = patchedSource;
+  src = fixedSource;
   dontUnpack = true;
   enableParallelBuilding = true;
   inherit nativeBuildInputs;

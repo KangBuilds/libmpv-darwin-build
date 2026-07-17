@@ -1,0 +1,15 @@
+--- a/src/OT/glyf/VarCompositeGlyph.hh
++++ b/src/OT/glyf/VarCompositeGlyph.hh
+@@ -180,12 +180,8 @@
+     rotation = rotation * HB_PI;
+     float c;
+     float s;
+-#ifdef HAVE_SINCOSF
+-    sincosf (rotation, &s, &c);
+-#else
+     c = cosf (rotation);
+     s = sinf (rotation);
+-#endif
+     float other[6] = {c, s, -s, c, 0.f, 0.f};
+     transform (matrix, trans, other);
+   }
