@@ -3,8 +3,14 @@
 project('libass', 'c')
 
 mod = import('unstable-external_project')
+cross_prefix = meson.get_cross_property('cross_prefix')
 
 p = mod.add_project('configure',
+    env : {
+        'AR': cross_prefix + '/ar',
+        'NM': cross_prefix + '/nm',
+        'RANLIB': cross_prefix + '/ranlib',
+    },
     configure_options : [
         '--prefix=@PREFIX@',
         '--disable-static',
