@@ -1,8 +1,8 @@
 {
   dav1d = {
-    version = "1.2.1";
-    url = "https://code.videolan.org/videolan/dav1d/-/archive/1.2.1/dav1d-1.2.1.tar.bz2";
-    sha256 = "a4003623cdc0109dec3aac8435520aa3fb12c4d69454fa227f2658cdb6dab5fa";
+    version = "1.5.3";
+    url = "https://code.videolan.org/videolan/dav1d/-/archive/1.5.3/dav1d-1.5.3.tar.bz2";
+    sha256 = "e099f53253f6c247580c554d53a13f1040638f2066edc3c740e4c2f15174ce22";
   };
   ffmpeg = {
     version = "8.1.2";
@@ -30,9 +30,9 @@
     sha256 = "b16e6bc0fc7e6a218583f40c7d201771f2e3072f85ef6e9217b36c1dc6b2aa25";
   };
   libass = {
-    version = "0.17.1";
-    url = "https://github.com/libass/libass/releases/download/0.17.1/libass-0.17.1.tar.xz";
-    sha256 = "f0da0bbfba476c16ae3e1cfd862256d30915911f7abaa1b16ce62ee653192784";
+    version = "0.17.5";
+    url = "https://github.com/libass/libass/releases/download/0.17.5/libass-0.17.5.tar.xz";
+    sha256 = "2dca25c0e0c837ddf00b52011b3f82cac1e4ddd3ad018227806b0c2288864acc";
   };
   libogg = {
     version = "1.3.5";
@@ -100,9 +100,9 @@
     sha256 = "3727b078c360ec69fa869de14bd6f75d7ee8d36987b071e6928d4720a28df3a6";
   };
   mbedtls = {
-    version = "3.4.1";
-    url = "https://github.com/Mbed-TLS/mbedtls/archive/refs/tags/v3.4.1.tar.gz";
-    sha256 = "a420fcf7103e54e775c383e3751729b8fb2dcd087f6165befd13f28315f754f5";
+    version = "3.6.6";
+    url = "https://github.com/Mbed-TLS/mbedtls/releases/download/mbedtls-3.6.6/mbedtls-3.6.6.tar.bz2";
+    sha256 = "8fb65fae8dcae5840f793c0a334860a411f884cc537ea290ce1c52bb64ca007a";
   };
   mpv = {
     version = "0.41.0";
