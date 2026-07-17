@@ -114,6 +114,7 @@ pkgs.stdenvNoCC.mkDerivation {
       `# audio output features`
       -Dalsa=disabled `# ALSA audio output`
       -Daudiounit=disabled `# AudioUnit output for iOS`
+      -Davfoundation=disabled `# AVFoundation audio output`
       -Dcoreaudio=disabled `# CoreAudio audio output`
       -Djack=disabled `# JACK audio output`
       -Dopenal=disabled `# OpenAL audio output`
