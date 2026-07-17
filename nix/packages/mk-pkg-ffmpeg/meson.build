@@ -251,6 +251,7 @@ video_default_options = [
     '--enable-demuxer=vplayer',
 
     # hwaccels
+    '--enable-hwaccel=av1_videotoolbox',
     '--enable-hwaccel=h263_videotoolbox',
     '--enable-hwaccel=h264_videotoolbox',
     '--enable-hwaccel=hevc_videotoolbox',

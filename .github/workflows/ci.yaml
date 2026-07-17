@@ -54,7 +54,7 @@ jobs:
       - name: Build iOS universal video-default
         env:
           XCODE_PATH: ${{ steps.xcode_path.outputs.xcode_path }}
-          VERSION: v0.0.0-test.${{ github.run_number }}
+          VERSION: ${{ github.ref_type == 'tag' && github.ref_name || format('v0.0.0-test.{0}', github.run_number) }}
         run: |
           nix develop -c make \
             XCODE_PATH="${XCODE_PATH}" \
@@ -65,6 +65,14 @@ jobs:
         run: |
           ls -lh result/libmpv-xcframeworks_*_ios-universal-video-default.tar.gz
           shasum -a 256 result/libmpv-xcframeworks_*_ios-universal-video-default.tar.gz
+
+      - name: Verify AV1 VideoToolbox
+        run: |
+          mkdir -p "${RUNNER_TEMP}/libmpv"
+          tar -xzf result/libmpv-xcframeworks_*_ios-universal-video-default.tar.gz \
+            -C "${RUNNER_TEMP}/libmpv"
+          find "${RUNNER_TEMP}/libmpv" -path '*/Avcodec.framework/Avcodec' \
+            -exec strings {} \; | grep -q av1_videotoolbox
 
       - name: Upload artifact
         uses: actions/upload-artifact@v7

@@ -5,9 +5,9 @@
     sha256 = "a4003623cdc0109dec3aac8435520aa3fb12c4d69454fa227f2658cdb6dab5fa";
   };
   ffmpeg = {
-    version = "6.0";
-    url = "https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz";
-    sha256 = "57be87c22d9b49c112b6d24bc67d42508660e6b718b3db89c44e47e289137082";
+    version = "8.1.2";
+    url = "https://ffmpeg.org/releases/ffmpeg-8.1.2.tar.xz";
+    sha256 = "464beb5e7bf0c311e68b45ae2f04e9cc2af88851abb4082231742a74d97b524c";
   };
   fftools-ffi = {
     version = "9b0d4da0";
@@ -44,6 +44,31 @@
     url = "https://github.com/pnggroup/libpng/archive/v1.6.40.tar.gz";
     sha256 = "62d25af25e636454b005c93cae51ddcd5383c40fa14aa3dae8f6576feb5692c2";
   };
+  libplacebo = {
+    version = "7.349.0";
+    url = "https://github.com/haasn/libplacebo/archive/refs/tags/v7.349.0.tar.gz";
+    sha256 = "627e32439a0b3d2b90368ead7e919f470ee7446c87cc0f7841bbe319b23aa8b1";
+  };
+  fast_float = {
+    version = "5.2.0";
+    url = "https://github.com/fastfloat/fast_float/archive/refs/tags/v5.2.0.tar.gz";
+    sha256 = "72bbfd1914e414c920e39abdc81378adf910a622b62c45b4c61d344039425d18";
+  };
+  glad = {
+    version = "2.0.4";
+    url = "https://github.com/Dav1dde/glad/archive/refs/tags/v2.0.4.tar.gz";
+    sha256 = "02629644c242dcc27c58222bd2c001d5e2f3765dbbcfd796542308bddebab401";
+  };
+  jinja = {
+    version = "3.1.2";
+    url = "https://github.com/pallets/jinja/archive/refs/tags/3.1.2.tar.gz";
+    sha256 = "ecae76cd1a064d40eb46c5375f07953d747f4d65b68cd3fa5f02c91714b799fc";
+  };
+  markupsafe = {
+    version = "2.1.2";
+    url = "https://github.com/pallets/markupsafe/releases/download/2.1.2/MarkupSafe-2.1.2.tar.gz";
+    sha256 = "abcabc8c2b26036d62d4c746381a6f7cf60aafcc653198ad678306986b09450d";
+  };
   libpngPatch = {
     version = "1.6.40-1";
     url = "https://wrapdb.mesonbuild.com/v2/libpng_1.6.40-1/get_patch";
@@ -75,9 +100,9 @@
     sha256 = "a420fcf7103e54e775c383e3751729b8fb2dcd087f6165befd13f28315f754f5";
   };
   mpv = {
-    version = "0.36.0";
-    url = "https://github.com/mpv-player/mpv/archive/refs/tags/v0.36.0.tar.gz";
-    sha256 = "29abc44f8ebee013bb2f9fe14d80b30db19b534c679056e4851ceadf5a5e8bf6";
+    version = "0.41.0";
+    url = "https://github.com/mpv-player/mpv/archive/refs/tags/v0.41.0.tar.gz";
+    sha256 = "ee21092a5ee427353392360929dc64645c54479aefdb5babc5cfbb5fad626209";
   };
   uchardet = {
     version = "0.0.8";
