@@ -27,7 +27,7 @@ let
     chmod -R 777 $src
 
     cd $src
-    patch -p1 <${../../../patches/ltmain-target-passthrough.patch}
+    patch -p1 <${../../../patches/libass-ltmain-target-passthrough.patch}
     cd -
 
     cp ${./meson.build} $src/meson.build
