@@ -39,6 +39,9 @@ let
         unzip ${libpngPatch} -d libpng-patch
         rsync -a libpng-patch/libpng-*/ $src/
 
+        # Xcode 26 no longer ships the legacy fp.h selected by libpng 1.6.40.
+        patch -d $src -p1 < ${./use-math-h-on-apple.patch}
+
         cp -r $src $out
       '';
 in
