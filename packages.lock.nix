@@ -69,6 +69,11 @@
     url = "https://github.com/pallets/markupsafe/releases/download/2.1.2/MarkupSafe-2.1.2.tar.gz";
     sha256 = "abcabc8c2b26036d62d4c746381a6f7cf60aafcc653198ad678306986b09450d";
   };
+  vulkan_headers = {
+    version = "1.3.243";
+    url = "https://github.com/KhronosGroup/Vulkan-Headers/archive/refs/tags/v1.3.243.tar.gz";
+    sha256 = "76c57490740369a26d68dd26d308e2faa2e0fc5d255498aa48ee389534fc5a48";
+  };
   libpngPatch = {
     version = "1.6.40-1";
     url = "https://wrapdb.mesonbuild.com/v2/libpng_1.6.40-1/get_patch";

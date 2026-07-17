@@ -23,6 +23,7 @@ let
   glad = fetch "glad" locks.glad;
   jinja = fetch "jinja" locks.jinja;
   markupsafe = fetch "markupsafe" locks.markupsafe;
+  vulkanHeaders = fetch "vulkan-headers" locks.vulkan_headers;
   source = pkgs.runCommand "${pname}-source-with-submodules-${version}" { } ''
     cp -r ${src} src
     chmod -R 777 src
@@ -32,6 +33,7 @@ let
     cp -r ${glad} src/3rdparty/glad
     cp -r ${jinja} src/3rdparty/jinja
     cp -r ${markupsafe} src/3rdparty/markupsafe
+    cp -r ${vulkanHeaders} src/3rdparty/Vulkan-Headers
     cp -r src $out
   '';
 in
