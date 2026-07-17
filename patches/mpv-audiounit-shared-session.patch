@@ -93,8 +93,7 @@
      if (!(ao->init_flags & AO_INIT_EXCLUSIVE)) {
          options |= AVAudioSessionCategoryOptionMixWithOthers;
      }
--
-+
+ 
 -    [instance setCategory:AVAudioSessionCategoryPlayback withOptions:options error:nil];
 -    [instance setMode:AVAudioSessionModeMoviePlayback error:nil];
 -    [instance setActive:YES error:nil];
