@@ -3,8 +3,7 @@ name: ci
 on:
   push:
     branches:
-      - ios-custom-build
-      - codex/mpv-0.42.0
+      - main
     tags:
       - "*"
   pull_request:
