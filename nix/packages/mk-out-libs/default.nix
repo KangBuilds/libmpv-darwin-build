@@ -64,13 +64,15 @@ if arch != archs.universal then
       ]
       ++ pkgs.lib.optionals (variant == variants.video) [
         dav1d
-        libxml2
         uchardet
         libass
         harfbuzz
         fribidi
         freetype
         libpng
+      ]
+      ++ pkgs.lib.optionals (variant == variants.video && flavor != flavors.lite) [
+        libxml2
       ]
       ++ pkgs.lib.optionals (variant == variants.video && flavor == flavors.encodersgpl) [
         libvpx

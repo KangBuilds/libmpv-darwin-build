@@ -67,9 +67,12 @@ audio_common_options = [
 
 video_common_options = [
     '--enable-neon', # improve hevc (h265) support on arm
-    '--enable-libxml2', # dash support
     '--enable-videotoolbox',
     '--enable-libdav1d', # av1 support
+]
+
+video_dash_options = [
+    '--enable-libxml2', # dash support
 ]
 
 # https://github.com/media-kit/libmpv-android-audio-build/blob/260666c0fef8c154971b5faf3f78da27c2bf2c40/buildscripts/flavors/default.sh
@@ -292,6 +295,67 @@ audio_encodersgpl_options = [
     # TODO: If audio_encoders is going to exist as its own package, be smarter about what encoders to include
 ]
 
+# Only what a Bilibili client plays: DASH video and audio streams in MP4,
+# the older FLV and MP4 single-file streams, and WebVTT or SubRip subtitles,
+# over HTTP(S). Drops libxml2 along with the DASH manifest demuxer.
+audio_lite_options = [
+    # decoders
+    '--enable-decoder=aac*',
+    '--enable-decoder=ac3*',
+    '--enable-decoder=eac3*',
+    '--enable-decoder=flac',
+    '--enable-decoder=mp3*',
+
+    # parsers
+    '--enable-parser=aac*',
+    '--enable-parser=ac3',
+    '--enable-parser=flac',
+    '--enable-parser=mpegaudio',
+
+    # demuxers
+    '--enable-demuxer=aac',
+    '--enable-demuxer=flac',
+    '--enable-demuxer=flv',
+    '--enable-demuxer=mov',
+    '--enable-demuxer=mp3',
+
+    # protocols
+    '--enable-protocol=file',
+    '--enable-protocol=http',
+    '--enable-protocol=httpproxy',
+    '--enable-protocol=https',
+    '--enable-protocol=tcp',
+    '--enable-protocol=tls',
+
+    # filters
+    '--enable-filter=overlay',
+    '--enable-filter=equalizer',
+]
+
+video_lite_options = [
+    # decoders
+    '--enable-decoder=h264',
+    '--enable-decoder=hevc',
+    '--enable-decoder=av1',
+    '--enable-decoder=libdav1d',
+    '--enable-decoder=webvtt',
+    '--enable-decoder=subrip',
+
+    # parsers
+    '--enable-parser=h264',
+    '--enable-parser=hevc',
+    '--enable-parser=av1',
+
+    # demuxers
+    '--enable-demuxer=webvtt',
+    '--enable-demuxer=srt',
+
+    # hwaccels
+    '--enable-hwaccel=av1_videotoolbox',
+    '--enable-hwaccel=h264_videotoolbox',
+    '--enable-hwaccel=hevc_videotoolbox',
+]
+
 video_encodersgpl_options = [
     '--enable-libvpx',
     '--enable-libx264',
@@ -306,6 +370,9 @@ options += common_options
 options += audio_common_options
 if variant == 'video'
     options += video_common_options
+    if flavor != 'lite'
+        options += video_dash_options
+    endif
 endif
 
 # components
@@ -318,6 +385,11 @@ elif flavor == 'full'
     options += audio_full_options
     if variant == 'video'
         options += video_full_options
+    endif
+elif flavor == 'lite'
+    options += audio_lite_options
+    if variant == 'video'
+        options += video_lite_options
     endif
 elif flavor == 'encodersgpl'
     options += audio_full_options

@@ -13,7 +13,7 @@ on:
 
 jobs:
   ci:
-    name: iOS universal video-default
+    name: iOS universal video-lite
     runs-on: xcode-27
     permissions:
       contents: write
@@ -58,7 +58,7 @@ jobs:
           done
           echo "xcode_path=${XCODE_PATH}" >> "$GITHUB_OUTPUT"
 
-      - name: Build iOS universal video-default
+      - name: Build iOS universal video-lite
         env:
           XCODE_PATH: ${{ steps.xcode_path.outputs.xcode_path }}
           VERSION: ${{ github.ref_type == 'tag' && github.ref_name || 'v0.3.0' }}
@@ -66,17 +66,17 @@ jobs:
           nix develop -c make \
             XCODE_PATH="${XCODE_PATH}" \
             VERSION="${VERSION}" \
-            TARGET=mk-out-archive-xcframeworks-ios-universal-video-default
+            TARGET=mk-out-archive-xcframeworks-ios-universal-video-lite
 
       - name: Inspect artifact size
         run: |
-          ls -lh result/libmpv-xcframeworks_*_ios-universal-video-default.tar.gz
-          shasum -a 256 result/libmpv-xcframeworks_*_ios-universal-video-default.tar.gz
+          ls -lh result/libmpv-xcframeworks_*_ios-universal-video-lite.tar.gz
+          shasum -a 256 result/libmpv-xcframeworks_*_ios-universal-video-lite.tar.gz
 
       - name: Verify AV1 VideoToolbox
         run: |
           mkdir -p "${RUNNER_TEMP}/libmpv"
-          tar -xzf result/libmpv-xcframeworks_*_ios-universal-video-default.tar.gz \
+          tar -xzf result/libmpv-xcframeworks_*_ios-universal-video-lite.tar.gz \
             -C "${RUNNER_TEMP}/libmpv"
           find "${RUNNER_TEMP}/libmpv" -path '*/Avcodec.framework/Avcodec' \
             -exec strings {} \; | grep -q av1_videotoolbox
@@ -125,11 +125,11 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
-          name: libmpv-xcframeworks-ios-universal-video-default
+          name: libmpv-xcframeworks-ios-universal-video-lite
           if-no-files-found: error
           retention-days: 7
           compression-level: 0
-          path: result/libmpv-xcframeworks_*_ios-universal-video-default.tar.gz
+          path: result/libmpv-xcframeworks_*_ios-universal-video-lite.tar.gz
 
       - name: Release
         uses: softprops/action-gh-release@v3
@@ -137,4 +137,4 @@ jobs:
         with:
           fail_on_unmatched_files: true
           overwrite_files: false
-          files: result/libmpv-xcframeworks_*_ios-universal-video-default.tar.gz
+          files: result/libmpv-xcframeworks_*_ios-universal-video-lite.tar.gz
