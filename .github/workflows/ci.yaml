@@ -51,6 +51,11 @@ jobs:
           XCODE_VERSION=$("${XCODE_PATH}/Contents/Developer/usr/bin/xcodebuild" -version)
           printf '%s\n' "${XCODE_VERSION}"
           [[ "${XCODE_VERSION}" == "Xcode 27"* ]]
+          for sdk in iphoneos iphonesimulator; do
+            tbd="$(xcrun --sdk "${sdk}" --show-sdk-path)/System/Library/Frameworks/CoreMedia.framework/CoreMedia.tbd"
+            grep -m2 -E '^(install-name|current-version):' "${tbd}"
+            grep -o '\$ld\$previous\$[^$]*\$[^$]*\$[0-9]*\$[0-9.]*\$[0-9.]*\$\$' "${tbd}" || true
+          done
           echo "xcode_path=${XCODE_PATH}" >> "$GITHUB_OUTPUT"
 
       - name: Build iOS universal video-default
@@ -85,6 +90,20 @@ jobs:
 
       - name: Verify XCFramework platforms
         run: python3 tests/xcframework_platforms.py "${RUNNER_TEMP}/libmpv"
+
+      - name: Verify load commands
+        run: |
+          # Xcode 27 SDKs record CoreMedia as the Swift overlay below iOS 12.2,
+          # which aborts apps in dyld at launch.
+          find "${RUNNER_TEMP}/libmpv" -path '*.framework/*' -type f -print0 |
+            while IFS= read -r -d '' library; do
+              if file -b "${library}" | grep -q Mach-O &&
+                otool -arch all -L "${library}" | grep -i 'swiftCoreMedia'; then
+                echo "::error::${library} links the CoreMedia Swift overlay"
+                exit 1
+              fi
+            done
+          python3 tests/load_commands.py "${RUNNER_TEMP}/libmpv"
 
       - name: Verify MPV version and Apple TLS
         run: |

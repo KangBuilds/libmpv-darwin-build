@@ -332,19 +332,19 @@ Inclusion:
     <tr>
       <td><strong>iOS</strong></td>
       <td>arm64</td>
-      <td><code>9.0</code></td>
-      <td>Required by <code>ffmpeg</code></td>
+      <td><code>12.2</code></td>
+      <td>Below 12.2, Xcode 27 SDKs link CoreMedia as the Swift overlay</td>
     </tr>
     <tr>
       <td rowspan="2"><strong>iOS Simulator</strong></td>
       <td>amd64</td>
-      <td><code>9.0</code></td>
-      <td>Required by <code>ffmpeg</code></td>
+      <td><code>12.2</code></td>
+      <td>Below 12.2, Xcode 27 SDKs link CoreMedia as the Swift overlay</td>
     </tr>
     <tr>
       <td>arm64</td>
-      <td><code>12.0</code></td>
-      <td>Required by <code>xcodebuild -create-xcframework</code></td>
+      <td><code>12.2</code></td>
+      <td>Matches the other iOS slices; the linker raises it to 14.0</td>
     </tr>
   </tbody>
 </table>
