@@ -70,6 +70,8 @@ pkgs.stdenvNoCC.mkDerivation {
     ]
     ++ pkgs.lib.optionals (variant == variants.video) [
       dav1d
+    ]
+    ++ pkgs.lib.optionals (variant == variants.video && flavor != flavors.lite) [
       libxml2
     ]
     ++ pkgs.lib.optionals (variant == variants.video && flavor == flavors.encodersgpl) [
